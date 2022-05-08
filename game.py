@@ -9,8 +9,8 @@ class Game:
         self.clock = pygame.time.Clock()
         self.player_type = player_type
         # screen settings
-        self.screen_width = 1280
-        self.screen_height = 700
+        self.screen_width = 1100
+        self.screen_height = 600
 
         # --- Bar dimension --- #
         self.bar_width = 10
@@ -28,7 +28,7 @@ class Game:
         self.player = pygame.Rect(self.screen_width - (2*self.bar_width), (self.screen_height / 2) - (self.bar_height / 2), self.bar_width, self.bar_height)
         self.opponent = pygame.Rect(self.bar_width, (self.screen_height / 2) - (self.bar_height / 2), self.bar_width, self.bar_height)
 
-        self.bg_color = pygame.Color("grey12")
+        self.bg_color = pygame.Color("cadetblue")
         self.light_grey = (200, 200, 200)
         self.ball_speed_x = 7 * random.choice((1, -1))
         self.ball_speed_y = 7 * random.choice((1, -1))
@@ -65,8 +65,8 @@ class Game:
         if self.player.bottom >= self.screen_height:
             self.player.bottom = self.screen_height
 
-    # --- Animation agent AI --- #
-    def animation_agentAi(self):
+    # --- Animation computer --- #
+    def animation_computer(self):
         if self.player.top < self.ball.y:
             self.player.top += self.player_speed
         if self.player.bottom > self.ball.y:
@@ -111,8 +111,8 @@ class Game:
             self.opponent.y = self.permanentAgentRL.update(s, self.opponent, self.ball, self.screen_height, self.ball_speed_x, True)
             if self.player_type == 'human':
                 self.animation_human()
-            elif self.player_type == 'agentAI':
-                self.animation_agentAi()
+            elif self.player_type == 'computer':
+                self.animation_computer()
             elif self.player_type == 'agentRL':
                 s = self.agentRL.centre_to_state(self.player.centery, self.screen_height, self.bar_height)
                 self.player.y = self.agentRL.update(s, self.player, self.ball, self.screen_height, self.ball_speed_x, False)

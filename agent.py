@@ -1,5 +1,5 @@
 import numpy as np
-
+# the q-learning algorithme
 class Qlearning:
 
     def __init__(self, screen_height, bar_height, alpha, gamma):
